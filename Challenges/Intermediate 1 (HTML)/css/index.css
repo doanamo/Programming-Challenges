@@ -2,3 +2,8 @@
 {
     border-bottom: 0px solid;
 }
+
+#addEventButton
+{
+    cursor: pointer;
+}
