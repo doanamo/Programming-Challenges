@@ -16,7 +16,10 @@ $("#addEventConfirmButton").click(function()
     // Add a new event.
     addEvent(date, time, description);
 
-    // Save event list.
+    // Sort events.
+    sortEvents();
+
+    // Save events.
     saveEvents();
 
     // Hide the modal dialog.
@@ -40,7 +43,10 @@ $("#editEventConfirmButton").click(function()
     element.find(".time").text(time);
     element.find(".description").text(description);
 
-    // Save event list.
+    // Sort events.
+    sortEvents();
+
+    // Save events.
     saveEvents();
 
     // Hide the modal dialog.
@@ -52,7 +58,10 @@ $("#editEventDeleteButton").click(function()
     // Remove event element.
     $("#editEventModal").data("event").remove();
 
-    // Save event list.
+    // Sort events.
+    sortEvents();
+
+    // Save events.
     saveEvents();
 
     // Hide the modal dialog.
@@ -133,6 +142,17 @@ function loadEvents()
         var entry = events[i];
         addEvent(entry.date, entry.time, entry.description);
     }
+}
+
+function sortEvents()
+{
+    // Sort by date.
+    $("#eventList tr").sort(function(a, b)
+    {
+        var dateA = new Date($(a).find(".date").text() + " " + $(a).find(".time").text());
+        var dateB = new Date($(b).find(".date").text() + " " + $(b).find(".time").text());
+        return (dateB - dateA) * -1;
+    }).appendTo('#eventList');
 }
 
 // Query local storage.
