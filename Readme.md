@@ -14,7 +14,7 @@ Personal repository where I store solutions for various programming challenges f
 Directory format:
 ```
 [Source]/[Challenge No.] ([Technology])
-Example: DailyProgrammer/Intermediate 1 (HTML)
+Example: DailyProgrammer/1. Intermediate (HTML)
 ```
 
 Commit format:
