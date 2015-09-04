@@ -1,5 +1,6 @@
 $("#addEventButton").click(function()
 {
+    // Show the modal dialog.
     $("#addEventModal").modal("show");
 });
 
@@ -22,6 +23,39 @@ $("#addEventConfirmButton").click(function()
     $("#addEventForm")[0].reset();
 });
 
+$("#editEventConfirmButton").click(function()
+{
+    // Get form input values.
+    var form = $("#editEventForm");
+    var date = form.find("#inputDate").val();
+    var time = form.find("#inputTime").val();
+    var description = form.find("#inputDescription").val();
+
+    // Edit element fields.
+    var element = $("#editEventModal").data("event");
+    element.find(".date").text(date);
+    element.find(".time").text(time);
+    element.find(".description").text(description);
+
+    // Hide the modal dialog.
+    $("#editEventModal").modal("hide");
+});
+
+$("#editEventDeleteButton").click(function()
+{
+    // Remove event element.
+    $("#editEventModal").data("event").remove();
+
+    // Hide the modal dialog.
+    $("#editEventModal").modal("hide");
+});
+
+$("#editEventModal").on("hidden.bs.modal", function()
+{
+    // Remove event reference.
+    $("#editEventModal").data("event", null);
+});
+
 function addEvent(date, time, description)
 {
     // Create an edit button.
@@ -30,15 +64,29 @@ function addEvent(date, time, description)
     editButton.addClass("glyphicon glyphicon-edit");
     editButton.click(function()
     {
+        // Show the modal dialog.
         $("#editEventModal").modal("show");
+
+        // Get the event element.
+        var element = editButton.data("event");
+
+        // Fill form input elements.
+        var form = $("#editEventForm");
+        form.find("#inputDate").val(element.find(".date").text());
+        form.find("#inputTime").val(element.find(".time").text());
+        form.find("#inputDescription").val(element.find(".description").text());
+
+        // Set currently edited event.
+        $("#editEventModal").data("event", element);
     });
 
     // Create a list element.
     var element = $("<tr>");
-    element.append($("<td>").text(date));
-    element.append($("<td>").text(time));
-    element.append($("<td>").text(description));
-    element.append($("<td>").append(editButton));
+    element.append($("<td>").addClass("date").text(date));
+    element.append($("<td>").addClass("time").text(time));
+    element.append($("<td>").addClass("description").text(description));
+    element.append($("<td>").addClass("button").append(editButton));
+    editButton.data("event", element);
 
     // Append element to the list.
     $("#eventList").append(element);
