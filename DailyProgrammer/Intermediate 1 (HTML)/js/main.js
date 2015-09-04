@@ -16,6 +16,9 @@ $("#addEventConfirmButton").click(function()
     // Add a new event.
     addEvent(date, time, description);
 
+    // Save event list.
+    saveEvents();
+
     // Hide the modal dialog.
     $("#addEventModal").modal("hide");
 
@@ -37,6 +40,9 @@ $("#editEventConfirmButton").click(function()
     element.find(".time").text(time);
     element.find(".description").text(description);
 
+    // Save event list.
+    saveEvents();
+
     // Hide the modal dialog.
     $("#editEventModal").modal("hide");
 });
@@ -45,6 +51,9 @@ $("#editEventDeleteButton").click(function()
 {
     // Remove event element.
     $("#editEventModal").data("event").remove();
+
+    // Save event list.
+    saveEvents();
 
     // Hide the modal dialog.
     $("#editEventModal").modal("hide");
@@ -92,7 +101,53 @@ function addEvent(date, time, description)
     $("#eventList").append(element);
 }
 
-// Add example events.
-addEvent("2015-09-01", "08:00", "Go out and have some fun at the city centre.");
-addEvent("2015-09-02", "14:30", "Drink some fine wine and get wasted.");
-addEvent("2015-09-03", "21:13", "Find the person you've been looking for your entire life.");
+function saveEvents()
+{
+    // Clear event list.
+    localStorage.removeItem("events");
+
+    // Store all events in an array.
+    var events = [];
+
+    $("#eventList").find("tr").each(function()
+    {
+        var entry = {};
+        entry.date = $(this).find(".date").text();
+        entry.time = $(this).find(".time").text();
+        entry.description = $(this).find(".description").text();
+        events.push(entry);
+    });
+
+    // Write to local storage.
+    localStorage.setItem("events", JSON.stringify(events));
+}
+
+function loadEvents()
+{
+    // Get events from local storage.
+    var events = JSON.parse(localStorage.getItem("events"));
+
+    // Add every event.
+    for(var i in events)
+    {
+        var entry = events[i];
+        addEvent(entry.date, entry.time, entry.description);
+    }
+}
+
+// Query local storage.
+if(localStorage.getItem("events") == null)
+{
+    // Add example events.
+    addEvent("2015-09-01", "08:00", "Go out and have some fun at the city centre.");
+    addEvent("2015-09-02", "14:30", "Drink some fine wine and get wasted.");
+    addEvent("2015-09-03", "21:13", "Find the person you've been looking for your entire life.");
+
+    // Save events.
+    saveEvents();
+}
+else
+{
+    // Load events.
+    loadEvents();
+}
