@@ -5,29 +5,16 @@ Programming Challenges
 
 Personal repository where I store solutions for various programming challenges found around the internet. This is also my personal sandbox for learning new languages and technologies.
 
+* [AdventOfCode](https://adventofcode.com/)
 * [DailyProgrammer](https://reddit.com/r/dailyprogrammer/)
 * [ProjectEuler](https://projecteuler.net/)
 * [HackerRank](https://hackerrank.com/)
-
-### Rules
-
-Directory format:
-```
-[Source]/[Challenge No.] ([Technology])
-Example: DailyProgrammer/1. Intermediate (HTML)
-```
-
-Commit format:
-```
-[Source] - [Challenge No.]: Commit message.
-Example: DailyProgrammer - Intermediate 1: Add readme file.
-```
 
 ### License
 
 The MIT License (MIT)
 
-Copyright (c) 2015 Piotr Doan
+Copyright (c) 2015-2021 Piotr Doan
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
