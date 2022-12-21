@@ -8,7 +8,7 @@
             "type": "lldb",
             "request": "launch",
             "name": "Debug",
-            "program": "${workspaceFolder}/AdventOfCode2022/target/debug/AOC2022.exe",
+            "program": "cargo build & ${workspaceFolder}/AdventOfCode2022/target/debug/AOC2022.exe",
             "args": [],
             "cwd": "${workspaceFolder}/AdventOfCode2022/",
             "sourceMap": { "/rustc/897e37553bba8b42751c67658967889d11ecd120/library/" : "C:/Users/doanp/.rustup/toolchains/stable-x86_64-pc-windows-msvc/lib/rustlib/src/rust/library/" }
